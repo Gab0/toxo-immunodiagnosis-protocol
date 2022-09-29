@@ -19,3 +19,8 @@ que é comumente utilizada como antígeno de captura em imunoensaios comerciais.
 
 Análises ainda não adicionadas.
 Em caso de interesse na utilização dos scripts antes que estejam minimamente documentados, me contacte em `gabriel_scf@hotmail.com`.
+
+## Autores
+
+`Araujo, GN` e `Peixoto-Rangel, AL`.
+
