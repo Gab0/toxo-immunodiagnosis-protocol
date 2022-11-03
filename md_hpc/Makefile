@@ -1,6 +1,9 @@
 STRUTS=../generate_mutation/Structures
 MUTREC=../generate_mutation/Recipes
 IMAGE_TAG=gab0/gromacs-toxo-hpc:v28
+REFERENCE_STRUCT=/home/Database/Research/TGondiiAntigens/Protocolo/generate_mutation/Structures/original_0_SAG1__0001.pdb
+F1=T_400_SALT.obj
+F2=T_4000_SALT.obj
 all:
 	ls
 image:
@@ -17,20 +20,16 @@ update:
         /home/Science/MD/run.sh \
         gabzn@cenapad.unicamp.br:~/homelovelace/MD
 retrieve:
-	scp -P 31459 \
-	gabzn@cenapad.unicamp.br:"~/homelovelace/MD/res.tar.gz" \
-	results
+	rsync --rsh='ssh -p31459' --append-verify -av gabzn@cenapad.unicamp.br:~/homelovelace/MD/results .
+
+define analyze
+	mdanalyze -i $(3) \
+			--load-session results/$(1) --reference-structure $(REFERENCE_STRUCT) --selection $(2)
+endef
 
 generate:
-
-	mdanalyze -d T400SALT -i DERIV \
-	--load-session results/T400SALT_ALL.obj -w --mutation-recipes ${MUTREC} --selection 1-4
-
-	mdanalyze -d T400SALT -i NAT \
-	--load-session results/T400SALT_ALL.obj -w --mutation-recipes ${MUTREC} --selection 17-20
-
-	mdanalyze -d T400SALT -i D \
-	--load-session results/T400SALT_ALL.obj -w --mutation-recipes ${MUTREC} --selection 8,5-7
-
-	mdanalyze -d T400SALT -i DALL \
-	--load-session results/T400SALT_ALL.obj -w --mutation-recipes ${MUTREC} --selection 9-16
+	$(call analyze,$(F1),1-4,DERIV)
+	$(call analyze,$(F1),17-20,NAT)
+	$(call analyze,$(F1),8\,5-7,D)
+	$(call analyze,$(F1),9-16,DALL)
+	$(call analyze,$(F2),all,NAT)
