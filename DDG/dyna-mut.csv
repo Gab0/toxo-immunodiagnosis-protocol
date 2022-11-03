@@ -1,0 +1,26 @@
+Mutação,Origem da Mutação,ΔEstabilidade (kcal/mol),Predição ΔΔG (kcal/mol)
+S132K,Artificial,0.409,1.734
+V19K,Artificial,0.438,1.585
+S131K,Artificial,1.071,1.511
+S15A,Natural,0.105,1.325
+Q50K,Artificial,0.055,0.497
+A128K,Artificial,0.27,0.39
+C235K,Artificial,0.959,0.364
+D145N,Natural,-0.245,0.279
+K220N,Natural,-0.048,0.239
+Q6K,Artificial,0.009,0.226
+T22K,Artificial,-0.031,0.079
+S46K,Artificial,-0.016,0.039
+K248Q,Natural,-0.243,0.025
+P240K,Artificial,-0.722,-0.06
+L21K,Artificial,0.053,-0.06
+N48K,Artificial,-0.065,-0.146
+K213N,Natural,-0.107,-0.159
+S230K,Artificial,-0.241,-0.244
+T201S,Natural,0.034,-0.324
+A4K,Artificial,-0.146,-0.451
+V133K,Artificial,0.036,-0.583
+I51K,Artificial,0.098,-0.616
+R129K,Artificial,-0.475,-0.833
+V8K,Artificial,0.21,-1.12
+I233K,Artificial,-0.234,-1.971
