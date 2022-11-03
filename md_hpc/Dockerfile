@@ -51,24 +51,23 @@ RUN install -D -m0755 mkdssp /usr/bin
 RUN install -D -m0755 test_readpdb /usr/bin/
 RUN install -D -m0644 LICENSE_1_0.txt "/usr/share/licenses/dssp/LICENSE"
 
-
-ARG CACHEBUST1=6
+# Install 'epitope-protocol';
+ARG CACHEBUST1=7
 RUN git clone https://github.com/Gab0/epitope-protocol
 WORKDIR epitope-protocol
 RUN pip3 install -r requirements.txt
 RUN pip3 install .
 
 
-
-ARG CACHEBUST=9
+# Install 'autoGromacs';
+ARG CACHEBUST=14
 RUN git clone https://github.com/Gab0/auto-gromacs
 WORKDIR auto-gromacs
 RUN pip3 install -r requirements.txt
 RUN pip3 install .
 
 # Address matplotlib backend dependencies and tests;
-RUN apt-get install -y python3-cairo
-RUN python3 -c "import matplotlib; matplotlib.use('Gtk3Agg')"
+RUN apt-get install -y python3-cairo libgtk-3-dev
 
 WORKDIR /home
 COPY test test
