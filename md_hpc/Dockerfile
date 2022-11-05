@@ -22,6 +22,9 @@ RUN pip3 install numpy==1.21.3
 RUN pip3 install mdanalysis freesasa
 RUN pip3 install correlationplus seaborn umap-learn
 
+# Address matplotlib backend dependencies and tests;
+RUN apt-get update
+RUN apt-get install -y python3-cairo libgtk-3-dev
 
 # Copy FORCE-FIELD files.
 ARG FF_DIR=/usr/local/gromacs/avx2_256/share/gromacs/top
@@ -60,14 +63,12 @@ RUN pip3 install .
 
 
 # Install 'autoGromacs';
-ARG CACHEBUST=14
+ARG CACHEBUST=16
 RUN git clone https://github.com/Gab0/auto-gromacs
 WORKDIR auto-gromacs
 RUN pip3 install -r requirements.txt
 RUN pip3 install .
 
-# Address matplotlib backend dependencies and tests;
-RUN apt-get install -y python3-cairo libgtk-3-dev
 
 WORKDIR /home
 COPY test test

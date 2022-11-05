@@ -14,22 +14,21 @@ upload-image:
 sif:
 	SINGULARITY_NOHTTPS=1 singularity build --sandbox gromacs-locald.sif docker-daemon://gromacs-local:latest
 	sudo singularity build gromacs-local.sif gromacs-locald.sif
-update:
-	scp -P 31459 \
-#        # $(STRUTS) \
-        /home/Science/MD/run.sh \
-        gabzn@cenapad.unicamp.br:~/homelovelace/MD
 retrieve:
 	rsync --rsh='ssh -p31459' --append-verify -av gabzn@cenapad.unicamp.br:~/homelovelace/MD/results .
 
 define analyze
 	mdanalyze -i $(3) \
-			--load-session results/$(1) --reference-structure $(REFERENCE_STRUCT) --selection $(2)
+			--load-session results/$(1) \
+			--reference-structure $(REFERENCE_STRUCT) \
+			--selection $(2)
 endef
 
 generate:
+# This part is project-specific,
+# matching the original project's structure groups.
 	$(call analyze,$(F1),1-4,DERIV)
 	$(call analyze,$(F1),17-20,NAT)
-	$(call analyze,$(F1),8\,5-7,D)
+	$(call analyze,$(F1),"8;5-7",D)
 	$(call analyze,$(F1),9-16,DALL)
-	$(call analyze,$(F2),all,NAT)
+	$(call analyze,$(F2),all,NAT4K)
